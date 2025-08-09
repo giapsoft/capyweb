@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luyện Phản Xạ Từ Vựng Với Nền Tảng Ngôn Ngữ CapyLala</title>
+    <script src="css/3.4.16.js"></script>
+    <script src="css/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #f8fafc;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+        }
+        .kpi-card {
+            background-color: #1A535C;
+            color: white;
+        }
+        .section-title {
+            color: #1A535C;
+        }
+        .stats-card-accent-border {
+            border-top: 4px solid #45B7D1;
+        }
+        .learner-card-accent-border {
+             border-top: 4px solid #FF6B6B;
+        }
+        .educator-card-accent-border {
+             border-top: 4px solid #10B981;
+        }
+        .affiliate-card-accent-border {
+             border-top: 4px solid #8B5CF6;
+        }
+        .ecosystem-card-accent-border {
+             border-top: 4px solid #F97316;
+        }
+        .atom {
+            width: 20px;
+            height: 20px;
+            background-color: #4ECDC4;
+            border-radius: 50%;
+        }
+        /* Phone Mockup Styles */
+        .phone-mockup {
+            position: relative;
+            width: 300px;
+            height: 600px;
+            margin: auto;
+            border: 16px black solid;
+            border-top-width: 60px;
+            border-bottom-width: 60px;
+            border-radius: 36px;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .phone-mockup:before {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 5px;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            border-radius: 10px;
+        }
+        .phone-mockup:after {
+            content: '';
+            display: block;
+            width: 35px;
+            height: 35px;
+            position: absolute;
+            bottom: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            border-radius: 50%;
+        }
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background-color: #1D2530;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* UPDATED SLIDESHOW STYLES FOR HORIZONTAL SLIDING */
+        .slideshow-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden; /* Hide slides that are outside the viewport */
+        }
+        .slides-wrapper {
+            display: flex;
+            height: 100%;
+            /* The transition effect for the slide */
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide {
+            /* Width is now set by JS, not here */
+            height: 100%;
+            flex-shrink: 0; /* Prevent slides from shrinking */
+        }
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Navigation Buttons */
+        .prev, .next {
+          cursor: pointer;
+          position: absolute;
+          top: 50%;
+          width: auto;
+          padding: 16px;
+          margin-top: -22px;
+          color: white;
+          font-weight: bold;
+          font-size: 18px;
+          transition: 0.6s ease;
+          border-radius: 0 3px 3px 0;
+          user-select: none;
+          background-color: rgba(0,0,0,0.3);
+          z-index: 10;
+        }
+        .next {
+          right: 0;
+          border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+          background-color: rgba(0,0,0,0.8);
+        }
+
+
+        /* --- Download Buttons --- */
+        .button-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+    bottom: 8px;
+    margin: auto;
+    width: 100%;
+            gap: 12px; /* Khoảng cách giữa 2 ảnh nút */
+        }
+
+        .button-group a {
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+        
+        .button-group a:hover {
+            transform: scale(1.05);
+        }
+
+        /* Dùng CSS để kiểm soát kích thước ảnh nút thay vì thay đổi thẻ img */
+        .button-group img {
+            width: 140px; /* Thu nhỏ ảnh nút */
+            height: auto;
+        }
+        
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 flex justify-between items-center">
+         
+            <h1 class="text-2xl font-bold section-title" style="    color: #AF7C5D;"> <img width="60" style="display: inline;" src="imgs/capylala_icon.svg"/> CapyLala</h1>
+            <div class="hidden md:flex items-center">
+                <a href="#interface" class="text-gray-600 hover:text-[#4ECDC4] mx-2 font-semibold">Giao Diện</a>
+                <a href="#learners" class="text-gray-600 hover:text-[#4ECDC4] mx-2 font-semibold">Người Học</a>
+                <a href="#statistics" class="text-gray-600 hover:text-[#4ECDC4] mx-2 font-semibold">Thống Kê</a>
+                <a href="#ecosystem" class="text-gray-600 hover:text-[#4ECDC4] mx-2 font-semibold">Hệ Sinh Thái</a>
+                <a href="#educators" class="text-gray-600 hover:text-[#4ECDC4] mx-2 font-semibold">Nhà Giáo Dục</a>
+                <a href="#affiliates" class="text-gray-600 hover:text-[#4ECDC4] mx-2 font-semibold">Cộng Tác Viên</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section class="text-center py-12">
+            <h2 class="text-4xl md:text-5xl font-extrabold section-title mb-4">Luyện phản xạ từ vựng với CapyLala</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">Một hệ sinh thái học tập thông minh, nơi việc chinh phục ngôn ngữ trở nên hiệu quả và đầy cảm hứng cho mọi đối tượng.</p>
+        <iframe style="margin:auto; max-width: 800px; aspect-ratio: 16 / 9;" src="https://www.youtube.com/embed/2kU0eW3fxOQ?si=47JBu-gGlFYJL2lk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 text-white">
+                <div class="kpi-card rounded-lg p-6 text-center shadow-lg">
+                    <h3 class="text-5xl font-bold text-[#4ECDC4]">6+</h3>
+                    <p class="mt-2 text-xl font-semibold">Ngôn Ngữ</p>
+                    <p class="text-gray-300">Anh, Trung, Nhật, Hàn & hơn thế nữa</p>
+                </div>
+                 <div class="kpi-card rounded-lg p-6 text-center shadow-lg">
+                    <h3 class="text-5xl font-bold text-[#FF6B6B]">100%</h3>
+                    <p class="mt-2 text-xl font-semibold">Học Bằng Phản Xạ</p>
+                     <p class="text-gray-300">AI quản lý trí nhớ, bạn chỉ cần học</p>
+                </div>
+                <div class="kpi-card rounded-lg p-6 text-center shadow-lg">
+                    <h3 class="text-5xl font-bold text-[#F97316]">AI</h3>
+                    <p class="mt-2 text-xl font-semibold">Tạo Từ Vựng</p>
+                     <p class="text-gray-300">Từ văn bản, hình ảnh, hoặc ý tưởng</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- NEW INTERFACE SLIDESHOW SECTION -->
+        <section id="interface" class="py-16 bg-gray-50 rounded-lg">
+            <div class="text-center">
+                 <h2 class="text-3xl md:text-4xl font-bold section-title">Giao Diện Trực Quan, Trải Nghiệm Mượt Mà</h2>
+                 <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto mb-12">Mọi tính năng mạnh mẽ nhất được gói gọn trong một thiết kế tinh giản, giúp bạn tập trung hoàn toàn vào việc học.</p>
+            </div>
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <div class="slideshow-container">
+                        <!-- Wrapper for slides, enables horizontal layout -->
+                        <div class="slides-wrapper">
+                            <div class="slide">
+                                <img src="screens/home.jpg" alt="Giao diện màn hình học tập CapyLala" onerror="this.onerror=null;this.src='https://placehold.co/400x800/cccccc/333333?text=Image+Not+Found';">
+                            </div>
+                            <div class="slide">
+                               <img src="screens/user_challenge.jpg" alt="Giao diện thống kê CapyLala" onerror="this.onerror=null;this.src='https://placehold.co/400x800/cccccc/333333?text=Image+Not+Found';">
+                            </div>
+                             <div class="slide">
+                               <img src="screens/listening.jpg" alt="Giao diện quản lý lớp học CapyLala" onerror="this.onerror=null;this.src='https://placehold.co/400x800/cccccc/333333?text=Image+Not+Found';">
+                            </div>
+                            <div class="slide">
+                               <img src="screens/memory_board.jpg" alt="Giao diện tạo gói từ vựng CapyLala" onerror="this.onerror=null;this.src='https://placehold.co/400x800/cccccc/333333?text=Image+Not+Found';">
+                            </div>
+                            <div class="slide">
+                               <img src="screens/store.jpg" alt="Giao diện chi tiết gói từ vựng CapyLala" onerror="this.onerror=null;this.src='https://placehold.co/400x800/cccccc/333333?text=Image+Not+Found';">
+                            </div>
+                            <div class="slide">
+                               <img src="screens/history_all_vocs.jpg" alt="Giao diện cửa hàng CapyLala" onerror="this.onerror=null;this.src='https://placehold.co/400x800/cccccc/333333?text=Image+Not+Found';">
+                            </div>
+                            <div class="slide">
+                               <img src="screens/vocabulary.jpg" alt="Giao diện bảng xếp hạng CapyLala" onerror="this.onerror=null;this.src='https://placehold.co/400x800/cccccc/333333?text=Image+Not+Found';">
+                            </div>
+                            <div class="slide">
+                               <img src="screens/history_of_a_voc.jpg" alt="Giao diện cộng tác viên CapyLala" onerror="this.onerror=null;this.src='https://placehold.co/400x800/cccccc/333333?text=Image+Not+Found';">
+                            </div>
+                            <div class="slide">
+                               <img src="screens/ctv_sale.jpg" alt="Giao diện cộng tác viên CapyLala" onerror="this.onerror=null;this.src='https://placehold.co/400x800/cccccc/333333?text=Image+Not+Found';">
+                            </div>
+                            <div class="slide">
+                               <img src="screens/ctv_ranking.jpg" alt="Giao diện cộng tác viên CapyLala" onerror="this.onerror=null;this.src='https://placehold.co/400x800/cccccc/333333?text=Image+Not+Found';">
+                            </div>
+                            <div class="slide">
+                               <img src="screens/ctv_income.jpg" alt="Giao diện cộng tác viên CapyLala" onerror="this.onerror=null;this.src='https://placehold.co/400x800/cccccc/333333?text=Image+Not+Found';">
+                            </div>
+                            <div class="slide">
+                               <img src="screens/ctv_hoahong.jpg" alt="Giao diện cộng tác viên CapyLala" onerror="this.onerror=null;this.src='https://placehold.co/400x800/cccccc/333333?text=Image+Not+Found';">
+                            </div>
+                            <div class="slide">
+                               <img src="screens/class_manager.jpg" alt="Giao diện cộng tác viên CapyLala" onerror="this.onerror=null;this.src='https://placehold.co/400x800/cccccc/333333?text=Image+Not+Found';">
+                            </div>
+                        </div>
+                        <a class="prev" onclick="plusSlides(-1, true)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1, true)">&#10095;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="learners" class="py-16 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold section-title">Phản Xạ Nhẹ Nhàng, Kết Quả Ngỡ Ngàng</h2>
+            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto mb-12">Khám phá triết lý "thông tin nguyên tử", biến những phản xạ tức thì thành một dòng chảy ngôn ngữ vô tận.</p>
+            <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-8 items-start text-left">
+                <div class="bg-white rounded-lg shadow-md p-6 learner-card-accent-border h-full flex flex-col">
+                    <h3 class="text-xl font-bold mb-4">1. Học Như Nguyên Tử</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">Kiến thức được "băm nhỏ" thành <strong class="text-[#1A535C]">[1 Từ ⇌ 1 Nghĩa]</strong>, giúp bạn ghi nhớ nhanh chóng và tạo đà học tập ngay tức thì.</p>
+                    <div class="mt-auto pt-6 text-center"><div class="inline-flex items-center justify-center space-x-4"><div class="w-16 h-16 bg-[#FF6B6B] rounded-lg flex items-center justify-center text-white font-bold text-xs text-center p-1">Bài học phức tạp</div><div class="text-3xl font-bold text-[#45B7D1]">→</div><div class="flex space-x-2"><div class="w-8 h-8 bg-[#4ECDC4] rounded-full"></div><div class="w-8 h-8 bg-[#4ECDC4] rounded-full"></div><div class="w-8 h-8 bg-[#4ECDC4] rounded-full"></div></div></div></div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 learner-card-accent-border h-full flex flex-col">
+                    <h3 class="text-xl font-bold mb-4">2. Giao Trí Nhớ Cho AI</h3>
+                    <p class="text-gray-600 mb-4 flex-grow">Hệ thống <strong class="text-[#1A535C]">đo lường phản xạ</strong> để biết khi nào cần ôn tập. Bạn chỉ cần thư giãn và để kiến thức đi vào não bộ một cách tự nhiên.</p>
+                    <div class="mt-auto pt-4"><div class="chart-container" style="height: 250px;"><canvas id="statsRadarChart"></canvas></div></div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 learner-card-accent-border h-full flex flex-col">
+                    <h3 class="text-xl font-bold mb-4">3. Bùng Nổ Giao Tiếp</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">Khi <strong class='text-[#1A535C]'>lượng đủ, chất sẽ đổi</strong>. Các phản xạ tức thì sẽ tự liên kết thành dòng chảy ngôn ngữ, mang lại sự tự tin vượt bậc.</p>
+                    <div class="mt-auto pt-6 flex justify-center items-stretch h-32"><div class="flex flex-col items-center space-y-2"><div class="atom"></div><div class="atom"></div><div class="atom"></div></div><div class="flex items-center mx-6"><div class="text-3xl font-bold text-[#45B7D1]">→</div></div><div class="flex items-center p-4 bg-teal-50 border border-teal-200 rounded-lg"><p class="text-teal-800 font-semibold text-center text-sm">Dòng chảy ngôn ngữ<br>lưu loát & tự nhiên</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="statistics" class="py-16 text-center bg-gray-50 rounded-lg">
+            <h2 class="text-3xl md:text-4xl font-bold section-title">Soi Rọi Hành Trình, Thấu Hiểu Trí Nhớ</h2>
+            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto mb-12">Hệ thống thống kê đa chiều biến mọi nỗ lực của bạn thành dữ liệu trực quan, giúp bạn học thông minh hơn.</p>
+            <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-8 items-start text-left">
+                <div class="bg-white rounded-lg shadow-md p-6 stats-card-accent-border h-full flex flex-col">
+                    <h3 class="text-xl font-bold mb-4">1. Bức Tranh Toàn Cảnh</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">Nắm bắt "sức khỏe" trí nhớ qua biểu đồ 11 cấp độ và theo dõi nỗ lực học tập của bạn mỗi ngày qua biểu đồ lịch sử chi tiết.</p>
+                    <div class="mt-auto pt-6 grid grid-cols-2 gap-4 items-center"><div class="chart-container" style="height: 150px;"><canvas id="memoryLevelsChart"></canvas></div><div class="chart-container" style="height: 150px;"><canvas id="dailyHistoryChart"></canvas></div></div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 stats-card-accent-border h-full flex flex-col">
+                    <h3 class="text-xl font-bold mb-4">2. "Vi Soi" Từng Từ</h3>
+                    <p class="text-gray-600 mb-4 flex-grow">Xem lại toàn bộ lịch sử tương tác của từng từ: thời điểm, đúng/sai, và bạn cần gợi ý nào (âm thanh, ảnh, chữ) để trả lời.</p>
+                    <div class="mt-auto pt-4 p-3 bg-gray-800 rounded-lg font-mono text-xs text-white space-y-2"><p><span class="text-green-400">ĐÚNG</span> [10:32:05] - Gợi ý: [Chữ]</p><p><span class="text-green-400">ĐÚNG</span> [10:31:50] - Gợi ý: [Âm thanh, Chữ]</p><p><span class="text-red-400">SAI</span> &nbsp;[10:30:12] - Gợi ý: [Âm thanh]</p></div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 stats-card-accent-border h-full flex flex-col">
+                    <h3 class="text-xl font-bold mb-4">3. Mài Giũa Toàn Diện</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">Dễ dàng lọc toàn bộ hệ thống thống kê cho từng kỹ năng: Nghe, Viết, Phiên Dịch, Phát Âm để biết chính xác nơi bạn cần tập trung.</p>
+                    <div class="mt-auto pt-6 grid grid-cols-2 gap-4"><div class="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M20 4a9 9 0 010 16M4 4a9 9 0 010 16" /></svg><span class="font-semibold text-blue-800">Nghe</span></div><div class="flex items-center space-x-3 p-3 bg-green-50 rounded-lg"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg><span class="font-semibold text-green-800">Viết</span></div><div class="flex items-center space-x-3 p-3 bg-yellow-50 rounded-lg"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg><span class="font-semibold text-yellow-800">Phiên dịch</span></div><div class="flex items-center space-x-3 p-3 bg-red-50 rounded-lg"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg><span class="font-semibold text-red-800">Phát âm</span></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW ECOSYSTEM SECTION -->
+        <section id="ecosystem" class="py-16 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold section-title">Hệ Sinh Thái Từ Vựng Thông Minh & Toàn Diện</h2>
+            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto mb-12">Tất cả công cụ bạn cần để xây dựng, tùy chỉnh và làm chủ kho từ vựng của riêng mình một cách dễ dàng.</p>
+            <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-8 items-start text-left">
+                <div class="bg-white rounded-lg shadow-md p-6 ecosystem-card-accent-border h-full flex flex-col">
+                    <h3 class="text-xl font-bold mb-4">1. Kho Tàng Sẵn Có & Mở Rộng</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">Bắt đầu ngay với 6+ ngôn ngữ và các bộ từ vựng thông dụng nhất (IELTS, TOEIC, JLPT...). Kho từ vựng của chúng tôi liên tục được cộng đồng và chuyên gia cập nhật, đảm bảo chất lượng và phong phú.</p>
+                    <div class="mt-auto pt-6 space-y-3">
+                        <div class="flex justify-around items-center text-sm font-semibold text-gray-700"><span>🇬🇧 Anh</span><span>🇨🇳 Trung</span><span>🇯🇵 Nhật</span><span>🇰🇷 Hàn</span></div>
+                        <div class="flex justify-around items-center text-sm font-semibold text-gray-700"><span>🇩🇪 Đức</span><span>🇷🇺 Nga</span><span>🇹🇭 Thái</span></div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 ecosystem-card-accent-border h-full flex flex-col">
+                    <h3 class="text-xl font-bold mb-4">2. Toàn Quyền Làm Chủ</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">Đây là kho từ vựng của bạn, bạn có toàn quyền. Tùy ý chỉnh sửa mọi thành phần, tạo bộ sưu tập cá nhân, và đặc biệt là nhập hàng loạt từ file Excel chỉ trong vài phút.</p>
+                    <div class="mt-auto pt-6 flex justify-around">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 ecosystem-card-accent-border h-full flex flex-col">
+                    <h3 class="text-xl font-bold mb-4">3. Trợ Lý AI Kiến Tạo</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">Chỉ cần cung cấp một văn bản, hình ảnh, hoặc một chủ đề, AI sẽ tự động phân tích và tạo ra danh sách từ vựng hoàn chỉnh với đầy đủ ý nghĩa, phát âm và ví dụ cho bạn.</p>
+                    <div class="mt-auto pt-6 flex justify-around">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="educators" class="py-16 bg-gray-50 rounded-lg">
+             <div class="text-center">
+                <h2 class="text-3xl md:text-4xl font-bold section-title">Biến Tri Thức Thành Tầm Ảnh Hưởng & Thu Nhập</h2>
+                <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto mb-12">CapyLala không chỉ là công cụ, mà là một nền tảng trọn vẹn để bạn xây dựng sự nghiệp giáo dục của riêng mình.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start max-w-6xl mx-auto">
+                <div class="bg-white rounded-lg shadow-md p-6 educator-card-accent-border h-full">
+                    <h3 class="text-xl font-bold mb-4">1. Từ Chuyên Gia Đến Doanh Nhân</h3>
+                    <p class="text-gray-600 mb-6">Giải phóng bạn khỏi mọi lo lắng về kỹ thuật. Dễ dàng tạo các gói từ vựng chuyên sâu, tự do định giá và tận hưởng hệ thống bán hàng tự động 100%. Toàn bộ doanh thu sẽ được chuyển thẳng về tài khoản của bạn, không chia sẻ, không phí ẩn.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center p-4 bg-gray-100 rounded-lg"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-5.747-8.247l11.494 4.499-11.494 4.499L12 6.253z" /></svg><span class="font-semibold">Tạo Gói Từ Vựng Dễ Dàng</span></div>
+                        <div class="flex items-center p-4 bg-gray-100 rounded-lg"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01" /></svg><span class="font-semibold">Bán Hàng Tự Động & Định Giá Tự Do</span></div>
+                        <div class="flex items-center p-4 bg-gray-100 rounded-lg"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg><span class="font-semibold">Nhận 100% Doanh Thu Trực Tiếp</span></div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 educator-card-accent-border h-full">
+                    <h3 class="text-xl font-bold mb-4">2. Dữ Liệu Là Trợ Giảng</h3>
+                    <p class="text-gray-600 mb-6">Nâng tầm việc giảng dạy của bạn với dữ liệu. Công cụ so sánh thành tích độc quyền cho phép bạn chọn một nhóm học viên, một bộ từ vựng và một kỹ năng bất kỳ để xem bảng xếp hạng chi tiết, giúp bạn thấu hiểu học viên hơn bao giờ hết.</p>
+                    <div class="chart-container h-80">
+                         <canvas id="studentRankingChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="affiliates" class="py-16 bg-gray-50 rounded-lg">
+            <div class="text-center">
+                <h2 class="text-3xl md:text-4xl font-bold section-title">Xây Dựng Nguồn Thu Nhập Vượt Trội Cùng CapyLala</h2>
+                <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto mb-12">Khám phá hệ thống đối tác độc đáo kết hợp hoa hồng vô hạn, công cụ bán hàng mạnh mẽ và cơ chế thưởng đột phá.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-8 items-start text-left">
+                <div class="bg-white rounded-lg shadow-md p-6 affiliate-card-accent-border h-full flex flex-col">
+                    <h3 class="text-xl font-bold mb-4">1. Hoa Hồng Affiliate vô hạn</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">Cơ chế Affliate mạnh mẽ và thông minh giúp bạn được tối đa thu nhập và có các công cụ mạnh mẽ để xây dựng kênh phân phối hiệu quả.</p>
+                    <div><img src='imgs/affiliate.png'/></div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 affiliate-card-accent-border h-full flex flex-col">
+                    <h3 class="text-xl font-bold mb-4">2. Kho Vũ Khí Tăng Trưởng</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">Chúng tôi trao cho bạn quyền năng để tự tạo ra thành công. Kích hoạt Flash Sale, tham gia Đấu Trường và tăng cấp để mở khóa những quyền lợi cao hơn.</p>
+                    <div class="mt-auto space-y-3">
+                        <div class="flex items-center"><span class="text-yellow-400 text-2xl mr-3">⚡</span><span><strong>Flash Sale:</strong> Tự tạo ưu đãi 3 giờ để bùng nổ doanh số.</span></div>
+                        <div class="flex items-center"><span class="text-red-500 text-2xl mr-3">🏆</span><span><strong>Đấu Trường:</strong> Đua top doanh số hàng ngày nhận thưởng nóng.</span></div>
+                        <div class="flex items-center"><span class="text-green-500 text-2xl mr-3">🚀</span><span><strong>Tăng Cấp CTV:</strong> Doanh số càng cao, hoa hồng càng lớn.</span></div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 affiliate-card-accent-border h-full flex flex-col">
+                    <h3 class="text-xl font-bold mb-4">3. Điểm B: Dòng Chảy Quyền Lợi</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">Điểm B là vật phẩm chiến lược kiếm được từ Đấu Trường. Nếu bạn không dùng hết để tăng giá trị đơn hàng, quyền lợi sẽ tự động <strong class="text-indigo-600">chuyển giao cho người giới thiệu bạn</strong>.</p>
+                    <div class="mt-auto text-center">
+                        <div class="text-2xl font-bold text-gray-500 mb-1">...</div>
+                        <div class="font-bold text-indigo-500 text-2xl -my-2">↑</div>
+                        <div class="p-3 bg-gray-100 rounded-lg text-sm font-semibold my-1">Người giới thiệu</div>
+                        <div class="font-bold text-indigo-500 text-2xl -my-2">↑</div>
+                        <div class="p-3 bg-indigo-100 rounded-lg text-sm font-semibold text-indigo-800 mt-1">BẠN</div>
+                        <div class="font-bold text-indigo-500 text-2xl -my-2">↑</div>
+                        <div class="p-2 bg-yellow-100 border border-yellow-300 rounded-lg text-sm font-semibold text-yellow-800 mt-1">Đơn hàng</div>
+                        <p class="text-xs text-gray-600 mt-3">(Quyền lợi Điểm B chuyển giao ngược lên trên)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="py-16 bg-gradient-to-r from-[#a632c1] to-[#3d2c83] text-white text-center rounded-lg shadow-xl">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold mb-4">Sẵn Sàng Hợp Tác & Phát Triển?</h2>
+                <p class="max-w-2xl mx-auto mb-8 text-lg text-gray-200">Chúng tôi luôn tìm kiếm những đối tác, nhà giáo dục và người đam mê ngôn ngữ để cùng nhau xây dựng một cộng đồng học tập toàn cầu.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#1A535C] text-white text-center py-6 mt-16">
+        <p>&copy; 2025 CapyLala. All Rights Reserved.</p>
+        <p class="text-gray-400">Nền tảng học ngôn ngữ của tương lai.</p>
+        <div style="height: 60px"></div>
+    </footer>
+ <div class="button-group">
+            <a href="https://apps.apple.com/us/app/capylala/id6739828663">
+                <img src="imgs/apple_store.png" alt="Download on the App Store">
+            </a>
+
+            <a href="https://play.google.com/store/apps/details?id=com.remyset.remyset_dolphin&pcampaignid=web_share">
+               <img src="imgs/google_play.webp" alt="Get it on Google Play">
+            </a>
+        </div>
+    <script>
+        // --- CORRECTED SLIDESHOW SCRIPT FOR HORIZONTAL SLIDING ---
+        let slideIndex = 1;
+        let slidesWrapper;
+        let slides;
+        let slideInterval;
+
+        document.addEventListener("DOMContentLoaded", function() {
+            slidesWrapper = document.querySelector(".slides-wrapper");
+            slides = document.getElementsByClassName("slide");
+            
+            if (slides.length > 0) {
+                // Set the total width of the wrapper to hold all slides side-by-side
+                slidesWrapper.style.width = `${slides.length * 100}%`;
+                // Set the width of each individual slide to be a fraction of the wrapper
+                for(const slide of slides) {
+                    slide.style.width = `${100 / slides.length}%`;
+                }
+                showSlides(slideIndex);
+                startSlideShow();
+            }
+
+            // Chart initializations
+            initializeCharts();
+        });
+        
+        function startSlideShow() {
+            clearInterval(slideInterval); // Clear any existing interval to prevent conflicts
+            slideInterval = setInterval(() => {
+                plusSlides(1, false); // Auto-advance to the next slide
+            }, 3000); // Change image every 3 seconds
+        }
+
+        // n is the number of slides to move, fromClick indicates if it was a manual button click
+        function plusSlides(n, fromClick = true) {
+            if (fromClick) {
+                // If user clicks, reset the auto-slide timer
+                clearInterval(slideInterval);
+                startSlideShow();
+            }
+            showSlides(slideIndex += n);
+        }
+
+        function showSlides(n) {
+            // Loop back to the first slide if at the end
+            if (n > slides.length) { slideIndex = 1; }
+            // Loop to the last slide if at the beginning
+            if (n < 1) { slideIndex = slides.length; }
+
+            // Calculate the offset to translate the wrapper.
+            // This is the percentage of the wrapper's own width.
+            const offset = -(slideIndex - 1) * (100 / slides.length);
+            if (slidesWrapper) {
+                slidesWrapper.style.transform = `translateX(${offset}%)`;
+            }
+        }
+
+        function initializeCharts() {
+            const tooltipTitleCallback = { plugins: { tooltip: { callbacks: { title: function(tooltipItems) { const item = tooltipItems[0]; let label = item.chart.data.labels[item.dataIndex]; return Array.isArray(label) ? label.join(' ') : label; } } } } };
+            const chartColors = { red: '#FF6B6B', cyan: '#4ECDC4', blue: '#45B7D1', yellow: '#F7B801', dark: '#1A535C', green: '#10B981', violet: '#8B5CF6' };
+            
+            const statsRadarCtx = document.getElementById('statsRadarChart')?.getContext('2d');
+            if (statsRadarCtx) new Chart(statsRadarCtx, { type: 'radar', data: { labels: ['Tốc độ', 'Chính xác', 'Độ trễ', 'Tần suất', 'Tự tin'], datasets: [{ label: 'Phân tích phản xạ', data: [90, 85, 70, 78, 95], backgroundColor: 'rgba(255, 107, 107, 0.2)', borderColor: chartColors.red, pointBackgroundColor: chartColors.red, pointBorderColor: '#fff', pointHoverBackgroundColor: '#fff', pointHoverBorderColor: chartColors.red }] }, options: { responsive: true, maintainAspectRatio: false, scales: { r: { angleLines: { color: 'rgba(0, 0, 0, 0.1)' }, grid: { color: 'rgba(0, 0, 0, 0.1)' }, pointLabels: { font: { size: 12 }, color: chartColors.dark }, ticks: { display: false, backdropColor: 'transparent' } } }, plugins: { legend: { display: false }, ...tooltipTitleCallback.plugins } } });
+
+            const memoryLevelsCtx = document.getElementById('memoryLevelsChart')?.getContext('2d');
+            if(memoryLevelsCtx) new Chart(memoryLevelsCtx, { type: 'doughnut', data: { labels: ['Thuộc', 'Quen', 'Biết', 'Khác'], datasets: [{ label: 'Mức Ghi Nhớ', data: [25, 35, 30, 10], backgroundColor: [ chartColors.cyan, chartColors.yellow, chartColors.red, 'rgb(200, 200, 200)'], borderColor: '#f8fafc', borderWidth: 4, cutout: '60%' }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, title: { display: true, text: 'Trí nhớ', position: 'top', font: {size: 14} }, ...tooltipTitleCallback.plugins } } });
+
+            const dailyHistoryCtx = document.getElementById('dailyHistoryChart')?.getContext('2d');
+            if(dailyHistoryCtx) new Chart(dailyHistoryCtx, { type: 'bar', data: { labels: ['T2', 'T3', 'T4', 'T5'], datasets: [ { label: 'Ôn lại', data: [15, 20, 25, 18], backgroundColor: chartColors.cyan }, { label: 'Học mới', data: [10, 5, 8, 12], backgroundColor: chartColors.blue }, { label: 'Quên', data: [2, 4, 1, 3], backgroundColor: chartColors.red } ] }, options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true } }, plugins: { legend: { display: false }, title: { display: true, text: 'Lịch sử', position: 'top', font: {size: 14} }, ...tooltipTitleCallback.plugins } } });
+            
+            const studentRankingCtx = document.getElementById('studentRankingChart')?.getContext('2d');
+            if(studentRankingCtx) new Chart(studentRankingCtx, { type: 'bar', data: { labels: ['Học viên A', 'Học viên B', 'Học viên C', 'Học viên D', 'Học viên E'], datasets: [{ label: 'Mức độ thành thạo (%)', data: [92, 85, 78, 65, 58], backgroundColor: [chartColors.green, chartColors.cyan, chartColors.blue, chartColors.yellow, 'rgba(247, 184, 1, 0.4)'], borderRadius: 4, }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, ...tooltipTitleCallback.plugins }, scales: { x: { beginAtZero: true, max: 100 } } } });
+        }
+    </script>
+</body>
+</html>

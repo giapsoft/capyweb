@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic Toàn Diện - Nền Tảng CapyLala</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #f8fafc;
+            scroll-behavior: smooth;
+        }
+        .section-card {
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07);
+            border: 1px solid #e2e8f0;
+        }
+        .main-title {
+            color: #1e293b;
+        }
+        .sub-title {
+            color: #475569;
+        }
+        .feature-icon {
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+        .arrow-down {
+            width: 2px;
+            height: 2rem;
+            background-color: #cbd5e1;
+            margin: 0.5rem auto;
+            position: relative;
+        }
+        .arrow-down::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid #cbd5e1;
+        }
+        .person-card {
+            border-left-width: 4px;
+            transition: all 0.3s ease;
+            background-color: white;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .person-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+        .highlight-text {
+            color: #2563eb; /* Tailwind's blue-600 */
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center my-12 md:my-16">
+            <h1 class="text-4xl md:text-6xl font-extrabold main-title">CapyLala</h1>
+            <p class="mt-4 text-xl md:text-2xl sub-title max-w-4xl mx-auto">Mô tả toàn diện hệ sinh thái học tập và kinh doanh thông minh</p>
+        </header>
+
+        <main class="space-y-16 md:space-y-24">
+
+            <!-- I. Dành cho Người Học -->
+            <section id="learners" class="section-card p-6 md:p-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-center main-title">I. Dành cho Người Học</h2>
+                <p class="text-center sub-title text-xl mt-2 mb-12">Triết lý "Phản Xạ Nhẹ Nhàng, Kết Quả Ngỡ Ngàng"</p>
+
+                <div class="space-y-12">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 flex items-center"><div class="feature-icon bg-blue-100 text-blue-600">📚</div><span>1. Nền Tảng Nội Dung Vững Chắc</span></h3>
+                        <p class="text-slate-600">Hành trình của bạn bắt đầu trên một thư viện nội dung khổng lồ, chi tiết và không ngừng mở rộng.</p>
+                        <ul class="mt-4 space-y-3 list-disc list-inside text-slate-700">
+                            <li><span class="highlight-text">Kho tàng đồ sộ:</span> Hơn 7 ngôn ngữ (Anh, Trung, Nhật, Hàn, Đức, Nga, Thái...), mỗi ngôn ngữ có trên 7.000 từ vựng cốt lõi.</li>
+                            <li><span class="highlight-text">Chi tiết đến từng "nguyên tử":</span> Mỗi từ vựng là một đơn vị kiến thức hoàn chỉnh, bao gồm đầy đủ hình ảnh, âm thanh, chữ viết, ví dụ và mô tả chi tiết trong cả ngôn ngữ bạn đang học và tiếng mẹ đẻ.</li>
+                            <li><span class="highlight-text">Tùy chọn chuyên sâu:</span> Riêng với tiếng Anh, bạn có toàn quyền lựa chọn phương ngữ mong muốn (Anh-Mỹ, Anh-Anh, Anh-Úc, Anh-Ấn) để đảm bảo trải nghiệm học tập phù hợp nhất với mục tiêu.</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                         <h3 class="text-2xl font-bold mb-4 flex items-center"><div class="feature-icon bg-green-100 text-green-600">🧠</div><span>2. Phương Pháp Học Tập Cách Mạng</span></h3>
+                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                             <div>
+                                 <h4 class="font-bold text-lg mb-2">Giao Trí Nhớ cho AI (AI-Managed Memory)</h4>
+                                 <p class="text-slate-600">CapyLala không "hỏi" bạn nhớ hay quên, mà âm thầm <span class="highlight-text">đo lường mọi phản xạ</span> của bạn để xây dựng một lộ trình ôn tập cá nhân hóa tuyệt đối. AI sẽ tự biết khi nào cần thử thách bạn.</p>
+                             </div>
+                             <div>
+                                 <h4 class="font-bold text-lg mb-2">Nguyên lý linh hoạt mức thông tin</h4>
+                                 <p class="text-slate-600">Khi bạn trả lời đúng liên tiếp, lượng thông tin gợi ý sẽ <span class="highlight-text">giảm dần</span>. Ví dụ: Ban đầu bạn cần cả hình ảnh và chữ viết, nhưng sau đó, mục tiêu là bạn chỉ cần nghe âm thanh cũng có thể phản xạ chính xác.</p>
+                             </div>
+                         </div>
+                    </div>
+
+                    <div>
+                         <h3 class="text-2xl font-bold mb-4 flex items-center"><div class="feature-icon bg-purple-100 text-purple-600">🎧</div><span>3. Trải Nghiệm Học Tập Tự Do</span></h3>
+                         <p class="text-slate-600 mb-4">Quá trình học được thiết kế để bạn hoàn toàn không bị trói buộc vào màn hình.</p>
+                         <ul class="mt-4 space-y-3 list-disc list-inside text-slate-700">
+                            <li><span class="highlight-text">Học 100% bằng phản xạ:</span> Các tương tác được tối giản hóa (phát âm lại, nói ý nghĩa, gõ từ...) để trở thành phản xạ tự nhiên.</li>
+                             <li><span class="highlight-text">Học "Rảnh Tay" với điều khiển Bluetooth:</span> Bạn có thể học mà không cần chạm hay nhìn vào màn hình, giải phóng đôi tay và đôi mắt.</li>
+                             <li><span class="highlight-text">Học mọi lúc, mọi nơi:</span> Hãy tưởng tượng bạn có thể học khi đang dắt chó đi dạo, khi ngồi bán hàng, khi chờ thang máy, hay thậm chí khi đang là hành khách trên xe. Kiến thức vẫn tự động đi vào não bộ.</li>
+                         </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 flex items-center"><div class="feature-icon bg-yellow-100 text-yellow-600">✨</div><span>4. Bùng Nổ Giao Tiếp: Khi Những Mảnh Ghép Tìm Thấy Nhau</span></h3>
+                        <p class="text-slate-600">Mỗi "nguyên tử" từ vựng bạn học không hề vô nghĩa. Chúng là những nốt nhạc đơn lẻ đang âm thầm được tích lũy. Và rồi, đến một khoảnh khắc "bùng nổ" – khi bạn xem phim, nghe nhạc hay giao tiếp thực tế – những mảnh ghép rời rạc đó sẽ tự tìm thấy nhau để tạo nên một bức tranh ngôn ngữ hoàn chỉnh. Đó không phải là sự gắng sức dịch thuật, mà là một <span class="highlight-text">dòng chảy ý nghĩ và lời nói tuôn ra một cách tự nhiên, mạch lạc, và đầy tự tin</span>.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="statistics" class="section-card p-6 md:p-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-center main-title">II. Hệ Thống Thống Kê Đa Chiều</h2>
+                <p class="text-center sub-title text-xl mt-2 mb-12">Biến việc học thành một môn khoa học có thể đo lường và phân tích.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Bản đồ Trí nhớ 11 Cấp độ</h4>
+                        <p class="text-slate-600">Theo dõi hành trình của từng từ vựng qua 9 cấp độ chi tiết (Biết, Quen, Thuộc) và 2 trạng thái đặc biệt (Chưa rõ, Hết hạn).</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">"Vi soi" Từng Khoảnh Khắc Học</h4>
+                        <p class="text-slate-600">Xem lại lịch sử tương tác: đúng/sai, thời điểm, và bạn đã cần những <span class="highlight-text">mẩu thông tin trợ giúp nào</span> (âm thanh, ảnh, chữ) để trả lời.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Nhật ký Nỗ lực & Thời gian thực tế</h4>
+                        <p class="text-slate-600">Thống kê chính xác <span class="highlight-text">thời gian học thực tế</span> và biểu đồ chi tiết cho thấy mỗi ngày bạn đã <span class="highlight-text">học mới</span>, <span class="highlight-text">quên</span>, và <span class="highlight-text">ôn lại</span> bao nhiêu từ.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Phân tích theo 4 Kỹ năng</h4>
+                        <p class="text-slate-600">Toàn bộ hệ thống thống kê mạnh mẽ trên đều có thể được <span class="highlight-text">lọc riêng biệt</span> cho từng kỹ năng: **Nghe - Viết - Phiên Dịch - Phát âm**.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="educators" class="section-card p-6 md:p-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-center main-title">III. Dành cho Nhà Giáo Dục & Sáng Tạo Nội Dung</h2>
+                <p class="text-center sub-title text-xl mt-2 mb-12">Nền tảng kinh doanh và giảng dạy của riêng bạn.</p>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Toàn quyền Sáng tạo & Tùy chỉnh</h4>
+                         <p class="text-slate-600">Cung cấp bộ công cụ mạnh mẽ để tạo gói từ vựng, nhập hàng loạt từ file Excel, hoặc sử dụng <span class="highlight-text">Trợ lý AI</span> để tự động tạo nội dung từ văn bản, hình ảnh, hay từ khóa.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Mô hình Kinh doanh Đột phá</h4>
+                        <p class="text-slate-600">Bạn tự do định giá và <span class="highlight-text">hưởng trọn vẹn 100% doanh thu</span>. Dòng tiền được chuyển <span class="highlight-text">thẳng vào tài khoản ngân hàng của bạn</span>. Nếu chưa có tài khoản, CapyLala hỗ trợ bạn <span class="highlight-text">mở tài khoản ngân hàng 100% online</span>.</p>
+                    </div>
+                    <div class="md:col-span-2">
+                        <h4 class="font-bold text-lg mb-2">Công cụ Quản lý & Phân tích Đa chiều</h4>
+                        <p class="text-slate-600">Tạo vô số lớp học, phân nhóm học viên linh hoạt. Công cụ so sánh thành tích độc quyền cho phép bạn chọn <span class="highlight-text">bất kỳ nhóm học viên nào</span>, so sánh với <span class="highlight-text">bất kỳ bộ từ vựng nào</span> theo <span class="highlight-text">bất kỳ kỹ năng nào</span> để có cái nhìn sâu sắc nhất.</p>
+                    </div>
+                 </div>
+            </section>
+
+            <section id="affiliates" class="section-card p-6 md:p-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-center main-title">IV. Dành cho Cộng Tác Viên (CTV)</h2>
+                <p class="text-center sub-title text-xl mt-2 mb-12">Một sân chơi kinh doanh được "Game hóa" ở đẳng cấp cao nhất.</p>
+                <div class="space-y-12">
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">Các Nguồn Thu Nhập Chính</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-slate-50 p-4 rounded-lg border">
+                                <h4 class="font-bold">1. HH Bán hàng Vô hạn tầng</h4>
+                                <p class="text-sm text-slate-600">Hưởng hoa hồng trên doanh số của toàn bộ mạng lưới khách hàng, không giới hạn tầng sâu.</p>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg border">
+                                <h4 class="font-bold">2. HH Giới thiệu CTV (2%)</h4>
+                                <p class="text-sm text-slate-600">Nhận 2% trên tổng doanh số của CTV F1. Mỗi 1 triệu XP sẽ mở khóa 1 lượt giới thiệu mới.</p>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg border">
+                                <h4 class="font-bold">3. HH Chênh lệch Cấp</h4>
+                                 <p class="text-sm text-slate-600">Thu nhập chính từ đội nhóm, hưởng chênh lệch % với nhánh F1 trên toàn bộ doanh số của nhánh đó.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visual HHH chênh lệch cấp -->
+                    <div>
+                         <h3 class="text-2xl font-bold mb-4 text-center">Trực Quan Hóa Hoa Hồng Chênh Lệch Cấp</h3>
+                         <div class="flow-card p-6">
+                            <div class="flex flex-col items-center space-y-4">
+                                <div class="text-center">
+                                    <div class="inline-block bg-amber-100 border-2 border-amber-300 text-amber-800 rounded-lg p-4">
+                                        <p class="font-bold">Đơn hàng 1.000.000 VNĐ</p>
+                                        <p class="text-sm">Bán bởi Chi (F3 của Bạn)</p>
+                                    </div>
+                                </div>
+                                <div class="arrow-down"></div>
+                                <div class="w-full max-w-lg person-card border-slate-400 p-4">
+                                    <div class="flex justify-between items-center"><p class="text-lg font-bold">Chi (F3)</p><p class="text-sm font-semibold bg-slate-100 rounded-full px-3 py-1">Cấp 1 (25%)</p></div>
+                                    <div class="mt-2 w-full bg-slate-200 rounded-full h-5"><div class="bg-slate-400 h-5 rounded-full" style="width: 25%"></div></div>
+                                    <p class="text-sm mt-2 text-slate-500">Thực nhận: <span class="highlight-text">250.000 VNĐ</span></p>
+                                </div>
+                                <div class="arrow-down"></div>
+                                <div class="w-full max-w-lg person-card border-blue-500 p-4">
+                                    <div class="flex justify-between items-center"><p class="text-lg font-bold">Bình (F2)</p><p class="text-sm font-semibold bg-blue-100 text-blue-800 rounded-full px-3 py-1">Cấp 3 (33%)</p></div>
+                                    <div class="mt-2 w-full bg-slate-200 rounded-full h-5"><div class="bg-blue-500 h-5 rounded-full" style="width: 33%"></div></div>
+                                    <p class="text-sm mt-2 text-slate-500">Nhận chênh lệch (33% - 25%): <span class="highlight-text">80.000 VNĐ</span></p>
+                                </div>
+                                <div class="arrow-down"></div>
+                                <div class="w-full max-w-lg person-card border-red-500 p-4">
+                                    <div class="flex justify-between items-center"><p class="text-lg font-bold">An (F1)</p><p class="text-sm font-semibold bg-red-100 text-red-800 rounded-full px-3 py-1">Cấp 2 (30%)</p></div>
+                                    <div class="mt-2 w-full bg-slate-200 rounded-full h-5"><div class="bg-red-500 h-5 rounded-full" style="width: 30%"></div></div>
+                                    <p class="text-sm mt-2 text-slate-500">Cấp thấp hơn Bình. Bị "nhảy cóc". Nhận: <span class="highlight-text text-red-600">0 VNĐ</span></p>
+                                </div>
+                                <div class="arrow-down"></div>
+                                <div class="w-full max-w-lg person-card border-green-500 p-4">
+                                    <div class="flex justify-between items-center"><p class="text-lg font-bold">Bạn</p><p class="text-sm font-semibold bg-green-100 text-green-800 rounded-full px-3 py-1">Cấp 5 (40%)</p></div>
+                                    <div class="mt-2 w-full bg-slate-200 rounded-full h-5"><div class="bg-green-500 h-5 rounded-full" style="width: 40%"></div></div>
+                                    <p class="text-sm mt-2 text-slate-500">Nhận chênh lệch với người gần nhất (Bình, 33%): <span class="highlight-text">70.000 VNĐ</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Điểm B -->
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-center">Trực Quan Hóa Điểm B: Dòng Chảy Quyền Lợi</h3>
+                        <div class="flow-card p-6">
+                            <div class="flex flex-col items-center space-y-4">
+                                 <div class="bg-amber-100 border-2 border-amber-300 text-amber-800 rounded-lg p-4 text-center">
+                                    <p class="font-bold">Đơn hàng 200.000 VNĐ</p>
+                                    <p class="text-sm">Giới hạn quy đổi tối đa: <span class="font-bold">50.000 Điểm B</span></p>
+                                </div>
+                                <div class="arrow-down"></div>
+                                <div class="w-full max-w-md person-card border-slate-400 p-4 flex justify-between items-center">
+                                    <div><p class="text-lg font-bold">Bình (F2)</p><p class="text-sm text-slate-500">Số dư: 10.000 B</p></div>
+                                    <div class="text-right"><p class="font-semibold text-green-600">Quy đổi: 10.000 B</p><p class="text-sm text-slate-500">Nhận thêm: 10.000 VNĐ</p></div>
+                                </div>
+                                <div class="arrow-down"><span class="absolute -top-3 left-8 text-xs bg-slate-100 px-2 py-1 rounded-full text-slate-500 whitespace-nowrap">Còn lại: 40.000 B</span></div>
+                                <div class="w-full max-w-md person-card border-blue-500 p-4 flex justify-between items-center">
+                                    <div><p class="text-lg font-bold">An (F1)</p><p class="text-sm text-slate-500">Số dư: 25.000 B</p></div>
+                                    <div class="text-right"><p class="font-semibold text-green-600">Quy đổi: 25.000 B</p><p class="text-sm text-slate-500">Nhận thêm: 25.000 VNĐ</p></div>
+                                </div>
+                                 <div class="arrow-down"><span class="absolute -top-3 left-8 text-xs bg-slate-100 px-2 py-1 rounded-full text-slate-500 whitespace-nowrap">Còn lại: 15.000 B</span></div>
+                                <div class="w-full max-w-md person-card border-green-500 p-4 flex justify-between items-center">
+                                    <div><p class="text-lg font-bold">Bạn</p><p class="text-sm text-slate-500">Số dư: 30.000 B</p></div>
+                                    <div class="text-right"><p class="font-semibold text-green-600">Quy đổi: 15.000 B</p><p class="text-sm text-slate-500">Nhận thêm: 15.000 VNĐ</p></div>
+                                </div>
+                                 <div class="arrow-down"></div>
+                                 <div class="bg-green-100 text-green-800 font-bold p-3 rounded-lg text-center">Quyền lợi đã được tận dụng hết!</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center mt-16 py-8 border-t border-slate-200">
+             <p class="text-slate-600 mt-2">© 2025 CapyLala. All Rights Reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
